@@ -1,8 +1,8 @@
 package MaxFrolov_RPIS82;
 
 public class EntityTariff implements Tariff {
-    Node head;
-    Node tail;
+    node head;
+    node tail;
     int size;
 
     public EntityTariff()
@@ -12,11 +12,11 @@ public class EntityTariff implements Tariff {
 
     public EntityTariff(Service[] services)
     {
-        head=tail=new Node();
+        head=tail=new node();
         head.service=services[0];
         for(int i=1;i<services.length;i++)
         {
-            tail.next=new Node(tail);
+            tail.next=new node(tail);
             tail=tail.next;
             tail.service=services[i];
         }
@@ -25,11 +25,11 @@ public class EntityTariff implements Tariff {
     @Override
     public boolean add(Service service) {
         if(head!=null){
-            tail.next=new Node(tail);
+            tail.next=new node(tail);
             tail=tail.next;
             tail.service=service;}
         else {
-            head=tail=new Node();
+            head=tail=new node();
             head.service=service;
         }
         return false;
@@ -37,7 +37,7 @@ public class EntityTariff implements Tariff {
 
     @Override
     public boolean add(Service service, int pos) {
-        Node current= head;
+        node current= head;
         for(int i=0;i<pos;i++)
             current=current.next;
         current.service=service;
@@ -46,7 +46,7 @@ public class EntityTariff implements Tariff {
 
     @Override
     public Service get(int pos) {
-        Node current= head;
+        node current= head;
         for(int i=0;i<pos;i++)
             current=current.next;
         return current.service;
@@ -54,7 +54,7 @@ public class EntityTariff implements Tariff {
 
     @Override
     public Service get(String name) {
-        Node current= head;
+        node current= head;
         do {
             if(current.service.getName().equals(name))
                 return current.service;
@@ -70,7 +70,7 @@ public class EntityTariff implements Tariff {
 
     @Override
     public Service set(int pos, Service service) {
-        Node current= head;
+        node current= head;
         for(int i=0;i<pos;i++)
             current=current.next;
         Service s=current.service;
@@ -80,7 +80,7 @@ public class EntityTariff implements Tariff {
 
     @Override
     public Service delete(int pos) {
-        Node current= head;
+        node current= head;
         for(int i=0;i<pos;i++)
             current=current.next;
         Service s=current.service;
@@ -90,7 +90,7 @@ public class EntityTariff implements Tariff {
 
     @Override
     public Service delete(String name) {
-        Node current= head;
+        node current= head;
         do {
             if(current.service.getName().equals(name))
             {
@@ -105,7 +105,7 @@ public class EntityTariff implements Tariff {
 
     @Override
     public int getSize() {
-        Node current= head;
+        node current= head;
         int n=0;
         do {
             n++;
@@ -117,7 +117,7 @@ public class EntityTariff implements Tariff {
     @Override
     public Service[] getServices() {
         int n=getSize();
-        Node current= head;
+        node current= head;
         Service[] services=new Service[n];
         for (int i=0;i<n;i++)
         {
