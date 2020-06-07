@@ -96,7 +96,7 @@ public class AccountManager {
         return null;
     }
 
-    public Service[] getServices(ServiceTypes serviceType)
+    public Service[] getSeervices(ServiceTypes serviceType)
     {
         ArrayList<Service> s=new ArrayList<>();
         for (IndividualAccount acc: accounts) {
@@ -106,4 +106,12 @@ public class AccountManager {
         return (Service[]) s.toArray();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder str= new StringBuilder();
+        for (IndividualAccount acc:accounts) {
+            str.append(acc.toString());
+        }
+        return str.toString();
+    }
 }

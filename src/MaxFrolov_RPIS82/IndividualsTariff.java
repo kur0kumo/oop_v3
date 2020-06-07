@@ -28,7 +28,6 @@ public class IndividualsTariff implements Tariff {
             DoubleCapacity();
         }
 
-
         for (int i = 0; i < this.services.length; ++i) {
             if (this.services[i] == null) {
                 this.services[i] = service;
@@ -39,6 +38,7 @@ public class IndividualsTariff implements Tariff {
 
         return false;
     }
+
     protected void DoubleCapacity()
     {
         Service[] newServices = new Service[this.capacity *= 2];
@@ -168,5 +168,55 @@ public class IndividualsTariff implements Tariff {
         }
 
         return totalCost;
+    }
+
+    @Override
+    public Service delete(Service service) {
+        int index=firstIndex(service);
+        if(index>0)
+            return delete(index);
+        else return null;
+    }
+
+    @Override
+    public int firstIndex(Service service) {
+        for (int i=0;i<getSize();i++)
+            if(services[i].equals(service))return i;
+        return -1;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append("services:\n");
+        for (Service serv:services) {
+            stringBuilder.append(serv.toString());
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash=31;
+        for (Service serv:services) hash*=serv.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean res=false;
+        if(obj.getClass().equals(IndividualsTariff.class))
+        {
+            IndividualsTariff tariff= (IndividualsTariff) obj;
+            res=(tariff.getSize()==getSize());
+            Service[] services=tariff.getServices();
+            for (int i=0;i<getSize();i++) {
+                res= services[i].equals(this.services[i]);
+                if(!res)return res;
+            }
+            return res;
+        }
+        return false;
     }
 }
